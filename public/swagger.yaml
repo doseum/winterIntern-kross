@@ -1,0 +1,152 @@
+openapi: 3.0.0
+info:
+  version: '1.0.0'
+  title: 'CompanyDataScraper'
+  description: 'CompanyDataScraper'
+servers:
+  - description: CompanyDataScraper
+    url: http://103.55.191.55
+paths:
+  /scrap/nbi/kis/{code}:
+    get:
+      summary: scrap company info from nicebizInfo(nice를 통해서 기업정보검색)
+      parameters:
+        - name: code
+          in: path
+          required: true
+          description: the code of company(ked code or bizNo)
+          schema:
+            type: string
+      responses:
+          '200':
+            description: OK
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    result:
+                      type: boolean
+                    data:
+                      type: object
+                      properties:
+                        companyName:
+                          type: string
+                        overview:
+                          type: object
+
+  /scrap/dart/publicinfo/{selector}/{code}:
+    get:
+      summary: scrap publicinfo of company from openDart API(공시정보)
+      parameters:
+        - name: selector
+          in: path
+          required: true
+          description: select what to get(0:공시검색, 1:기업개황)
+          schema:
+            type: string
+        - name: code
+          in: path
+          required: true
+          description: company code on openDart(사업자번호)
+          schema:
+            type: string
+      responses:
+          '200':
+            description: OK
+            content:
+              schema:
+                type: string
+
+  /scrap/dart/bizrepo/{selector}/{code}/{year}/{repocode}:
+    get:
+      summary: scrap company's business report from openDart API(사업보고서 주요정보)
+      parameters:
+        - name: selector
+          in: path
+          required: true
+          description: select what to get(0-증자감자 현황, 1-배당에관한 사항, 2-자기주식 취득 및 처분 현황, 3-최대주주 현황, 4-최대주주 변동현황, 5-소액주주 현황, 6-임원현황, 7-직원현황, 8-이사,감사의 개인별 보수현황, 9-이사,감사 전체의 보수현황, 10-개인별 보수지급 금액, 11-타법인 출자현황)
+          schema:
+            type: string
+        - name: code
+          in: path
+          required: true
+          description: company code on openDart(사업자번호)
+          schema:
+            type: string
+        - name: year
+          in: path
+          required: true
+          description: business year(사업연도)
+          schema:
+            type: string
+        - name: repocode
+          in: path
+          required: true
+          description: report code(11011-사업보고서, 11012-반기보고서, 11013-1분기 보고서, 11014-3분기 보고서)
+          schema:
+            type: string
+      responses:
+          '200':
+            description: OK
+            content:
+              schema:
+                type: string
+
+  /scrap/dart/comfininfo/{selector}/{code}/{year}/{repocode}:
+    get:
+      summary: scrap company's finincial info from openDart API(상장기업 재무정보)
+      parameters:
+        - name: selector
+          in: path
+          required: true
+          description: select what to get(0-단일회사 주요계정, 1-다중회사 주요계정)
+          schema:
+            type: string
+        - name: code
+          in: path
+          required: true
+          description: company code on openDart(사업자번호)
+          schema:
+            type: string
+        - name: year
+          in: path
+          required: true
+          description: business year(사업연도)
+          schema:
+            type: string
+        - name: repocode
+          in: path
+          required: true
+          description: report code(11011-사업 보고서, 11012-반기 보고서, 11013-1분기 보고서, 11014-3분기 보고서)
+          schema:
+            type: string
+      responses:
+          '200':
+            description: OK
+            content:
+              schema:
+                type: string
+
+  /scrap/dart/discinterest/{selector}/{code}:
+    get:
+      summary: scrap disclosure interest of company from openDart API(지분공시 종합정보)
+      parameters:
+        - name: selector
+          in: path
+          required: true
+          description: select what to get(0-대량보유 상황보고, 1-임원,주요주주 소유보고)
+          schema:
+            type: string
+        - name: code
+          in: path
+          required: true
+          description: company code on openDart(사업자번호)
+          schema:
+            type: string
+      responses:
+          '200':
+            description: OK
+            content:
+              schema:
+                type: string
