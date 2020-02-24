@@ -4,11 +4,7 @@ const capirStatus=async(code,year,repocode)=>{
   //증자,감자 현황
   try {
     const browser=await puppeteer.launch({
-<<<<<<< HEAD
       headless: true,
-=======
-      headless: tru,
->>>>>>> b243339261ff7fd6d8e2cb656cb24c5ad7f02cbe
       args:['--no-sandbox']
     })
 
