@@ -4,7 +4,7 @@ const capirStatus=async(code,year,repocode)=>{
   //증자,감자 현황
   try {
     const browser=await puppeteer.launch({
-      headless: true,
+      headless: false,
       args:['--no-sandbox']
     })
 
@@ -21,6 +21,7 @@ const capirStatus=async(code,year,repocode)=>{
       }))
       await page.goto('about:blank')
       await page.close()
+      await browser.close()
     }
     return res
   } catch (e) {
