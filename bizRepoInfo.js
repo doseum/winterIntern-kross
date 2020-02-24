@@ -4,7 +4,7 @@ const capirStatus=async(code,year,repocode)=>{
   //증자,감자 현황
   try {
     const browser=await puppeteer.launch({
-      headless: false,
+      headless: tru,
       args:['--no-sandbox']
     })
 
@@ -21,8 +21,8 @@ const capirStatus=async(code,year,repocode)=>{
       }))
       await page.goto('about:blank')
       await page.close()
-      await browser.close()
     }
+    await browser.close()
     return res
   } catch (e) {
     console.log(e);
@@ -50,6 +50,7 @@ const alocMatter=async(code,year,repocode)=>{
         return Array.from(document.querySelectorAll('body > pre')).map(body=>(body.textContent))
       }))
     }
+    await browser.close()
     return res
   } catch (e) {
     console.log(e);
@@ -77,6 +78,7 @@ const stockAcDs=async(code,year,repocode)=>{
         return Array.from(document.querySelectorAll('body > pre')).map(body=>(body.textContent))
       }))
     }
+    await browser.close()
     return res
   } catch (e) {
     console.log(e);
@@ -104,6 +106,7 @@ const largestShrStat=async(code,year,repocode)=>{
         return Array.from(document.querySelectorAll('body > pre')).map(body=>(body.textContent))
       }))
     }
+    await browser.close()
     return res
   } catch (e) {
     console.log(e);
@@ -131,6 +134,7 @@ const largestShrChg=async(code,year,repocode)=>{
         return Array.from(document.querySelectorAll('body > pre')).map(body=>(body.textContent))
       }))
     }
+    await browser.close()
     return res
   } catch (e) {
     console.log(e);
@@ -158,6 +162,7 @@ const minorShrStat=async(code,year,repocode)=>{
         return Array.from(document.querySelectorAll('body > pre')).map(body=>(body.textContent))
       }))
     }
+    await browser.close()
     return res
   } catch (e) {
     console.log(e);
@@ -185,6 +190,7 @@ const execStat=async(code,year,repocode)=>{
         return Array.from(document.querySelectorAll('body > pre')).map(body=>(body.textContent))
       }))
     }
+    await browser.close()
     return res
   } catch (e) {
     console.log(e);
@@ -212,6 +218,7 @@ const empStat=async(code,year,repocode)=>{
         return Array.from(document.querySelectorAll('body > pre')).map(body=>(body.textContent))
       }))
     }
+    await browser.close()
     return res
   } catch (e) {
     console.log(e);
@@ -239,6 +246,7 @@ const execAuditStat=async(code,year,repocode)=>{
         return Array.from(document.querySelectorAll('body > pre')).map(body=>(body.textContent))
       }))
     }
+    await browser.close()
     return res
   } catch (e) {
     console.log(e);
@@ -266,6 +274,7 @@ const execAuditTotStat=async(code,year,repocode)=>{
         return Array.from(document.querySelectorAll('body > pre')).map(body=>(body.textContent))
       }))
     }
+    await browser.close()
     return res
   } catch (e) {
     console.log(e);
@@ -293,6 +302,7 @@ const indivByPay=async(code,year,repocode)=>{
         return Array.from(document.querySelectorAll('body > pre')).map(body=>(body.textContent))
       }))
     }
+    await browser.close()
     return res
   } catch (e) {
     console.log(e);
@@ -322,6 +332,7 @@ const otherCorpStmStat=async(code,year,repocode)=>{
       await page.goto('about:blank')
       await page.close()
     }
+    await browser.close()
     return res
   } catch (e) {
     console.log(e);

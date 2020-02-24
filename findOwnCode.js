@@ -46,6 +46,7 @@ function findComName(code){
       res=ComName[0].slice(3,ComName[0].length)
     }
     else res=ComName[0]
+    await browser.close()
     resolve(res)
   })
 }

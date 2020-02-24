@@ -20,6 +20,7 @@ const majorStock=async(code)=>{
         return Array.from(document.querySelectorAll('body > pre')).map(body=>(body.textContent))
       }))
     }
+    await browser.close()
     return res
   } catch (e) {
     console.log(e);
@@ -47,6 +48,7 @@ const eleStock=async(code)=>{
         return Array.from(document.querySelectorAll('body > pre')).map(body=>(body.textContent))
       }))
     }
+    await browser.close()
     return res
   } catch (e) {
     console.log(e);
