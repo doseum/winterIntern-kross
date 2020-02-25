@@ -2,6 +2,7 @@ const puppeteer=require('puppeteer')
 
 const majorStock=async(code)=>{
   //대량보유 상황보고
+  var result={okay:'',data:''}
   try {
     const browser=await puppeteer.launch({
       headless: true,
@@ -16,20 +17,24 @@ const majorStock=async(code)=>{
 
       await page.waitForSelector('body > pre')
 
-      res.push(await page.evaluate(()=>{
+      res.push(JSON.parse(await page.evaluate(()=>{
         return Array.from(document.querySelectorAll('body > pre')).map(body=>(body.textContent))
-      }))
+      })))
     }
     await browser.close()
-    return res
+    result.okay=true
+    result.data=res;
+    return result
   } catch (e) {
-    console.log(e);
-    return e
+    result.okay=false
+    result['message']=e
+    return result
   }
 }
 
 const eleStock=async(code)=>{
   //임원,주요주주 소유보고
+  var result={okay:'',data:''}
   try {
     const browser=await puppeteer.launch({
       headless: true,
@@ -44,15 +49,18 @@ const eleStock=async(code)=>{
 
       await page.waitForSelector('body > pre')
 
-      res.push(await page.evaluate(()=>{
+      res.push(JSON.parse(await page.evaluate(()=>{
         return Array.from(document.querySelectorAll('body > pre')).map(body=>(body.textContent))
-      }))
+      })))
     }
     await browser.close()
-    return res
+    result.okay=true
+    result.data=res
+    return result
   } catch (e) {
-    console.log(e);
-    return e
+    result.okay=false
+    result['message']=e
+    return result
   }
 }
 

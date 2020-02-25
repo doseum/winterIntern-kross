@@ -2,6 +2,7 @@ const puppeteer=require('puppeteer')
 
 const singleCom=async(code,year,repocode)=>{
   //단일회사 주요계정
+  var result={okay:'',data:''}
   try {
     const browser=await puppeteer.launch({
       headless: true,
@@ -16,20 +17,24 @@ const singleCom=async(code,year,repocode)=>{
 
       await page.waitForSelector('body > pre')
 
-      res.push(await page.evaluate(()=>{
+      res.push(JSON.parse(await page.evaluate(()=>{
         return Array.from(document.querySelectorAll('body > pre')).map(body=>(body.textContent))
-      }))
+      })))
     }
     await browser.close()
-    return res
+    result.okay=true
+    result.data=res;
+    return result
   } catch (e) {
-    console.log(e);
-    return e
+    result.okay=false
+    result['message']=e
+    return result
   }
 }
 
 const multiCom=async(code,year,repocode)=>{
   //다중회사 주요계정
+  var result={okay:'',data:''}
   try {
     const browser=await puppeteer.launch({
       headless: true,
@@ -49,14 +54,17 @@ const multiCom=async(code,year,repocode)=>{
 
     await page.waitForSelector('body > pre')
 
-    res.push(await page.evaluate(()=>{
+    res.push(JSON.parse(await page.evaluate(()=>{
       return Array.from(document.querySelectorAll('body > pre')).map(body=>(body.textContent))
-    }))
+    })))
     await browser.close()
-    return res
+    result.okay=true
+    result.data=res
+    return result
   } catch (e) {
-    console.log(e);
-    return e
+    result.okay=false
+    result['message']=e
+    return result
   }
 }
 

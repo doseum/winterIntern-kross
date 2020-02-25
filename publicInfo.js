@@ -2,6 +2,7 @@ const puppeteer=require('puppeteer')
 
 const pubSearch=async(code)=>{
   //공시검색
+  var result={okay:'',data:''}
   try {
     const browser=await puppeteer.launch({
       headless: true,
@@ -16,20 +17,24 @@ const pubSearch=async(code)=>{
 
       await page.waitForSelector('body > pre')
 
-      res.push(await page.evaluate(()=>{
+      res.push(JSON.parse(await page.evaluate(()=>{
         return Array.from(document.querySelectorAll('body > pre')).map(body=>(body.textContent))
-      }))
+      })))
     }
     await browser.close()
-    return res
+    result.okay=true
+    result.data=res;
+    return result
   } catch (e) {
-    console.log(e);
-    return e
+    result.okay=false
+    result['message']=e
+    return result
   }
 }
 
 const companyOutlook=async(code)=>{
   //기업개황
+  var result={okay:'',data:''}
   try {
     const browser=await puppeteer.launch({
       headless: true,
@@ -44,15 +49,18 @@ const companyOutlook=async(code)=>{
 
       await page.waitForSelector('body > pre')
 
-      res.push(await page.evaluate(()=>{
+      res.push(JSON.parse(await page.evaluate(()=>{
         return Array.from(document.querySelectorAll('body > pre')).map(body=>(body.textContent))
-      }))
+      })))
     }
     await browser.close()
-    return res
+    result.okay=true
+    result.data=res;
+    return result
   } catch (e) {
-    console.log(e);
-    return e
+    result.okay=false
+    result['message']=e
+    return result
   }
 }
 

@@ -7,7 +7,7 @@ var disInterest=require('../disclosureInterest.js')
 var ownCodeFinder=require('../findOwnCode.js')
 var router = express.Router();
 
-/* GET users listing. */
+//nice기업정보 scraping
 router.get('/nbi/kis/:code', function(req, res) {
   nbiScraper.doScrap(req.params.code).then(function(result){
     res.send(result);
@@ -20,11 +20,11 @@ router.get('/dart/publicinfo/:selector/:code',function(req,res){
     //기업 opendart고유번호 검색
     return ownCodeFinder.findOwnCode(result)
   }).then(function(result){
-    if(req.params.selector==0) {
+    if(req.params.selector==1) {
       //공시검색
       return publicInfo.publicSearch(result)
     }
-    else if(req.params.selector==1){
+    else if(req.params.selector==2){
       //기업개황
       return publicInfo.companyOutlook(result)
     }
@@ -40,51 +40,51 @@ router.get('/dart/bizrepo/:selector/:code/:year/:repocode',function(req,res){
     //기업 opendart고유번호 검색
     return ownCodeFinder.findOwnCode(result)
   }).then(function(result){
-    if(req.params.selector==0){
+    if(req.params.selector==1){
       //증자감자 현황
       return bizRepo.capirStatus(result,req.params.year,req.params.repocode)
     }
-    else if (req.params.selector==1){
+    else if (req.params.selector==2){
       //배당에 관한 사항
       return bizRepo.alocMatter(result,req.params.year,req.params.repocode)
     }
-    else if(req.params.selector==2){
+    else if(req.params.selector==3){
       //자기주식 취득 및 처분 현황
       return bizRepo.stockAcDs(result,req.params.year,req.params.repocode)
     }
-    else if (req.params.selector==3){
+    else if (req.params.selector==4){
       //최대주주 현황
       return bizRepo.largestShrStat(result,req.params.year,req.params.repocode)
     }
-    else if (req.params.selector==4) {
+    else if (req.params.selector==5) {
       //최대주주 변동 현황
       return bizRepo.largestShrChg(result,req.params.year,req.params.repocode)
     }
-    else if (req.params.selector==5) {
+    else if (req.params.selector==6) {
       //소액주주 현황
       return bizRepo.minorShrStat(result,req.params.year,req.params.repocode)
     }
-    else if (req.params.selector==6) {
+    else if (req.params.selector==7) {
       //임원 현황
       return bizRepo.execStat(result,req.params.year,req.params.repocode)
     }
-    else if (req.params.selector==7) {
+    else if (req.params.selector==8) {
       //직원 현황
       return bizRepo.empStat(result,req.params.year,req.params.repocode)
     }
-    else if (req.params.selector==8) {
+    else if (req.params.selector==9) {
       //이사,감사의 개인별 보수현황
       return bizRepo.execAuditStat(result,req.params.year,req.params.repocode)
     }
-    else if (req.params.selector==9) {
+    else if (req.params.selector==10) {
       //이사,감사의 전체 보수현황
       return bizRepo.execAuditTotStat(result,req.params.year,req.params.repocode)
     }
-    else if (req.params.selector==10) {
+    else if (req.params.selector==11) {
       //개인별 보수지급 금액
       return bizRepo.indivByPay(result,req.params.year,req.params.repocode)
     }
-    else{
+    else if(req.params.selector==12){
       //타법인 출자현황
       return bizRepo.otherCorpStmStat(result,req.params.year,req.params.repocode)
     }
@@ -100,11 +100,11 @@ router.get('/dart/comfininfo/:selector/:code/:year/:repocode',function(req,res){
     //기업 opendart고유번호 검색
     return ownCodeFinder.findOwnCode(result)
   }).then(function(result){
-    if(req.params.selector==0){
+    if(req.params.selector==1){
       //단일회사 주요계정
       return comInfo.singleCom(result,req.params.year,req.params.repocode)
     }
-    else if(req.params.selector==1) {
+    else if(req.params.selector==2) {
       //다중회사 주요계정
       return comInfo.multiCom(result,req.params.year,req.params.repocode)
     }
@@ -120,11 +120,11 @@ router.get('/dart/discinterest/:selector/:code',function(req,res){
     //기업 opendart고유번호 검색
     return ownCodeFinder.findOwnCode(result)
   }).then(function(result){
-    if(req.params.selector==0){
+    if(req.params.selector==1){
       //대량보유 상황보고
       return disInterest.majorStock(result)
     }
-    else if (req.params.selector==1) {
+    else if (req.params.selector==2) {
       //임원,주요주주 소유보고
       return disInterest.eleStock(result)
     }

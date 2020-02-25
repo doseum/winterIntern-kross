@@ -42,7 +42,7 @@ paths:
         - name: selector
           in: path
           required: true
-          description: select what to get(0:공시검색, 1:기업개황)
+          description: select what to get(1-공시검색, 2-기업개황)
           schema:
             type: string
         - name: code
@@ -65,7 +65,7 @@ paths:
         - name: selector
           in: path
           required: true
-          description: select what to get(0-증자감자 현황, 1-배당에관한 사항, 2-자기주식 취득 및 처분 현황, 3-최대주주 현황, 4-최대주주 변동현황, 5-소액주주 현황, 6-임원현황, 7-직원현황, 8-이사,감사의 개인별 보수현황, 9-이사,감사 전체의 보수현황, 10-개인별 보수지급 금액, 11-타법인 출자현황)
+          description: select what to get(1-증자감자 현황, 2-배당에관한 사항, 3-자기주식 취득 및 처분 현황, 4-최대주주 현황, 5-최대주주 변동현황, 6-소액주주 현황, 7-임원현황, 8-직원현황, 9-이사,감사의 개인별 보수현황, 10-이사,감사 전체의 보수현황, 11-개인별 보수지급 금액, 12-타법인 출자현황)
           schema:
             type: string
         - name: code
@@ -100,7 +100,7 @@ paths:
         - name: selector
           in: path
           required: true
-          description: select what to get(0-단일회사 주요계정, 1-다중회사 주요계정)
+          description: select what to get(1-단일회사 주요계정, 2-다중회사 주요계정)
           schema:
             type: string
         - name: code
@@ -135,7 +135,7 @@ paths:
         - name: selector
           in: path
           required: true
-          description: select what to get(0-대량보유 상황보고, 1-임원,주요주주 소유보고)
+          description: select what to get(1-대량보유 상황보고, 2-임원,주요주주 소유보고)
           schema:
             type: string
         - name: code

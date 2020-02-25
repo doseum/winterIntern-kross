@@ -2,6 +2,7 @@ const puppeteer=require('puppeteer')
 
 const capirStatus=async(code,year,repocode)=>{
   //증자,감자 현황
+  var result={okay:'',data:''}
   try {
     const browser=await puppeteer.launch({
       headless: true,
@@ -16,22 +17,26 @@ const capirStatus=async(code,year,repocode)=>{
 
       await page.waitForSelector('body > pre')
 
-      res.push(await page.evaluate(()=>{
+      res.push(JSON.parse(await page.evaluate(()=>{
         return Array.from(document.querySelectorAll('body > pre')).map(body=>(body.textContent))
-      }))
+      })))
       await page.goto('about:blank')
       await page.close()
     }
     await browser.close()
-    return res
+    result.okay=true;
+    result.data=res;
+    return result
   } catch (e) {
-    console.log(e);
-    return e
+    result.okay=false
+    result['message']=e
+    return result
   }
 }
 
 const alocMatter=async(code,year,repocode)=>{
   //배당에 관한 사항
+  var result={okay:'',data:''}
   try {
     const browser=await puppeteer.launch({
       headless: true,
@@ -46,21 +51,25 @@ const alocMatter=async(code,year,repocode)=>{
 
       await page.waitForSelector('body > pre')
 
-      res.push(await page.evaluate(()=>{
+      res.push(JSON.parse(await page.evaluate(()=>{
         return Array.from(document.querySelectorAll('body > pre')).map(body=>(body.textContent))
-      }))
+      })))
     }
     await browser.close()
-    return res
+    result.okay=true
+    result.data=res
+    return result
   } catch (e) {
-    console.log(e);
-    return e
+    result.okay=false
+    result['message']=e
+    return result
   }
 }
 
 const stockAcDs=async(code,year,repocode)=>{
   //자기주식 취득 및 처분현황
-  try {
+  var result={okay:'',data:''}
+  try{
     const browser=await puppeteer.launch({
       headless: true,
       args:['--no-sandbox']
@@ -74,20 +83,24 @@ const stockAcDs=async(code,year,repocode)=>{
 
       await page.waitForSelector('body > pre')
 
-      res.push(await page.evaluate(()=>{
+      res.push(JSON.parse(await page.evaluate(()=>{
         return Array.from(document.querySelectorAll('body > pre')).map(body=>(body.textContent))
-      }))
+      })))
     }
     await browser.close()
-    return res
+    result.okay=true;
+    result.data=res
+    return result
   } catch (e) {
-    console.log(e);
-    return e
+    result.okay=false
+    result['message']=e
+    return result
   }
 }
 
 const largestShrStat=async(code,year,repocode)=>{
   //최대주주 현황
+  var result={okay:'',data:''}
   try {
     const browser=await puppeteer.launch({
       headless: true,
@@ -102,20 +115,24 @@ const largestShrStat=async(code,year,repocode)=>{
 
       await page.waitForSelector('body > pre')
 
-      res.push(await page.evaluate(()=>{
+      res.push(JSON.parse(await page.evaluate(()=>{
         return Array.from(document.querySelectorAll('body > pre')).map(body=>(body.textContent))
-      }))
+      })))
     }
     await browser.close()
-    return res
+    result.okay=true
+    result.data=res
+    return result
   } catch (e) {
-    console.log(e);
-    return e
+    result.okay=false
+    result['message']=e
+    return result
   }
 }
 
 const largestShrChg=async(code,year,repocode)=>{
   //최대주주 변동 현황
+  var result={okay:'',data:''}
   try {
     const browser=await puppeteer.launch({
       headless: true,
@@ -130,20 +147,24 @@ const largestShrChg=async(code,year,repocode)=>{
 
       await page.waitForSelector('body > pre')
 
-      res.push(await page.evaluate(()=>{
+      res.push(JSON.parse(await page.evaluate(()=>{
         return Array.from(document.querySelectorAll('body > pre')).map(body=>(body.textContent))
-      }))
+      })))
     }
     await browser.close()
-    return res
+    result.okay=true
+    result.data=res
+    return result
   } catch (e) {
-    console.log(e);
-    return e
+    result.okay=false
+    result['message']=e
+    return result
   }
 }
 
 const minorShrStat=async(code,year,repocode)=>{
   //소액주주 변동 현황
+  var result={okay:'',data:''}
   try {
     const browser=await puppeteer.launch({
       headless: true,
@@ -158,20 +179,24 @@ const minorShrStat=async(code,year,repocode)=>{
 
       await page.waitForSelector('body > pre')
 
-      res.push(await page.evaluate(()=>{
+      res.push(JSON.parse(await page.evaluate(()=>{
         return Array.from(document.querySelectorAll('body > pre')).map(body=>(body.textContent))
-      }))
+      })))
     }
     await browser.close()
-    return res
+    result.okay=true;
+    result.data=res
+    return result
   } catch (e) {
-    console.log(e);
-    return e
+    result.okay=false
+    result['message']=e
+    return result
   }
 }
 
 const execStat=async(code,year,repocode)=>{
   //임원 현황
+  var result={okay:'',data:''}
   try {
     const browser=await puppeteer.launch({
       headless: true,
@@ -186,20 +211,24 @@ const execStat=async(code,year,repocode)=>{
 
       await page.waitForSelector('body > pre')
 
-      res.push(await page.evaluate(()=>{
+      res.push(JSON.parse(await page.evaluate(()=>{
         return Array.from(document.querySelectorAll('body > pre')).map(body=>(body.textContent))
-      }))
+      })))
     }
     await browser.close()
-    return res
+    result.okay=true
+    result.data=res
+    return result
   } catch (e) {
-    console.log(e);
-    return e
+    result.okay=false
+    result['message']=e
+    return result
   }
 }
 
 const empStat=async(code,year,repocode)=>{
   //직원 현황
+  var result={okay:'',data:''}
   try {
     const browser=await puppeteer.launch({
       headless: true,
@@ -214,20 +243,24 @@ const empStat=async(code,year,repocode)=>{
 
       await page.waitForSelector('body > pre')
 
-      res.push(await page.evaluate(()=>{
+      res.push(JSON.parse(await page.evaluate(()=>{
         return Array.from(document.querySelectorAll('body > pre')).map(body=>(body.textContent))
-      }))
+      })))
     }
     await browser.close()
-    return res
+    result.okay=true
+    result.data=res;
+    return result
   } catch (e) {
-    console.log(e);
-    return e
+    result.okay=false
+    result['message']=e
+    return result
   }
 }
 
 const execAuditStat=async(code,year,repocode)=>{
   //이사,감사의 개인별 보수
+  var result={okay:'',data:''}
   try {
     const browser=await puppeteer.launch({
       headless: true,
@@ -242,20 +275,24 @@ const execAuditStat=async(code,year,repocode)=>{
 
       await page.waitForSelector('body > pre')
 
-      res.push(await page.evaluate(()=>{
+      res.push(JSON.parse(await page.evaluate(()=>{
         return Array.from(document.querySelectorAll('body > pre')).map(body=>(body.textContent))
-      }))
+      })))
     }
     await browser.close()
-    return res
+    result.okay=true
+    result.data=res
+    return result
   } catch (e) {
-    console.log(e);
-    return e
+    result.okay=false
+    result['message']=e
+    return result
   }
 }
 
 const execAuditTotStat=async(code,year,repocode)=>{
   //이사,감사의 전체의 보수현황
+  var result={okay:'',data:''}
   try {
     const browser=await puppeteer.launch({
       headless: true,
@@ -270,20 +307,24 @@ const execAuditTotStat=async(code,year,repocode)=>{
 
       await page.waitForSelector('body > pre')
 
-      res.push(await page.evaluate(()=>{
+      res.push(JSON.parse(await page.evaluate(()=>{
         return Array.from(document.querySelectorAll('body > pre')).map(body=>(body.textContent))
-      }))
+      })))
     }
     await browser.close()
-    return res
+    result.okay=true
+    result.data=res;
+    return result
   } catch (e) {
-    console.log(e);
-    return e
+    result.okay=false
+    result['message']=e
+    return result
   }
 }
 
 const indivByPay=async(code,year,repocode)=>{
   //개인별 보수지급 금액
+  var result={okay:'',data:''}
   try {
     const browser=await puppeteer.launch({
       headless: true,
@@ -298,20 +339,24 @@ const indivByPay=async(code,year,repocode)=>{
 
       await page.waitForSelector('body > pre')
 
-      res.push(await page.evaluate(()=>{
+      res.push(JSON.parse(await page.evaluate(()=>{
         return Array.from(document.querySelectorAll('body > pre')).map(body=>(body.textContent))
-      }))
+      })))
     }
     await browser.close()
-    return res
+    result.okay=true;
+    result.data=res;
+    return result
   } catch (e) {
-    console.log(e);
-    return e
+    result.okay=false
+    result['message']=e
+    return result
   }
 }
 
 const otherCorpStmStat=async(code,year,repocode)=>{
   //타법인 출자현황
+  var result={okay:'',data:''}
   try {
     const browser=await puppeteer.launch({
       headless: true,
@@ -326,17 +371,20 @@ const otherCorpStmStat=async(code,year,repocode)=>{
 
       await page.waitForSelector('body > pre')
 
-      res.push(await page.evaluate(()=>{
+      res.push(JSON.parse(await page.evaluate(()=>{
         return Array.from(document.querySelectorAll('body > pre')).map(body=>(body.textContent))
-      }))
+      })))
       await page.goto('about:blank')
       await page.close()
     }
     await browser.close()
-    return res
+    result.okay=true
+    result.data=res;
+    return result
   } catch (e) {
-    console.log(e);
-    return e
+    result.okay=false
+    result['message']=e
+    return result
   }
 }
 
